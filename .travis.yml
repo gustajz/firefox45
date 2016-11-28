@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build -t firefox45 .
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker tag firefox45 gustajz/firefox45
+  - docker push gustajz/firefox45:latest
